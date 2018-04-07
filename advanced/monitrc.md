@@ -1,6 +1,6 @@
 # Monitoring with Monit
 
-Edit the main config file at /etc/monit/monitrc
+Edit the main config file at /etc/monitrc
 
 Content:
 
@@ -40,12 +40,12 @@ Content:
 That's your base file. Now, let's add some site files at /etc/monit.d/
 For your first website, add a file named yoursitename.cnf, e.g. tutorialinux.cnf
 
-    # Site monitoring fragment for tutorialinux.com
-    check host tutorialinux.com with address tutorialinux.com
+    # Site monitoring fragment for yoursitename.com
+    check host yoursitename.com with address yoursitename.com
         if failed port 80 protocol http for 2 cycles then alert
 
-    check file access.log with path /var/www/tutorialinux/sites/tutorialinux.com/error_log
-        if size > 15 MB then exec "/usr/local/sbin/logrotate -f /var/www/tutorialinux/sites/tutorialinux.com/error_log"
+    check file access.log with path /var/log/nginx/yoursitename.com.error.log;
+        if size > 15 MB then exec "/usr/sbin/logrotate -f /var/log/nginx/yoursitename.com.error.log"
 
 
 Restart monit and you're good to go!
